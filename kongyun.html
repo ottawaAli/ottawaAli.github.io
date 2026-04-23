@@ -1,243 +1,320 @@
 <!DOCTYPE HTML>
 <html lang="zh-CN">
-
-	<head>
-		<title>空运规则</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=1200,user-scalable=yes"><!--最大宽度1200px 允许用户缩放-->
-		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
-		<link rel="stylesheet" type="text/css" href="css/tf.css" />
-		<link rel="stylesheet" type="text/css" href="css/style1.css" />
-		
-		<style>
-			.center {
-			    display: flex;
-			    justify-content: center;
-			    align-items: center;
-			}
-			  
-			.center {
-			    text-align: center;
-			  }
-			
-			.red {
-				color: red;
-			}
-			
-			.blue {
-				color: blue;
-			}
-			.image {
-			    float: right;
-			    margin-left: 15px;
-			}
-        .delivery-list {
-            margin-left: 30px;
-            list-style: none;
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>空运规则</title>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/tf.css" />
+    <link rel="stylesheet" type="text/css" href="css/style1.css" />
+    <style>
+        :root{
+            --bg:#f7f8fc;
+            --card:#ffffff;
+            --text:#1f2937;
+            --muted:#6b7280;
+            --primary:#2457d6;
+            --primary-soft:#eef4ff;
+            --danger:#c62828;
+            --warning:#fff4d6;
+            --border:#e5e7eb;
+            --shadow:0 10px 30px rgba(17,24,39,.08);
+            --radius:18px;
         }
-
-        .delivery-list li {
-            margin-bottom: 5px;
-			font-size: 10pt;
+        body{
+            background:var(--bg);
+            color:var(--text);
+            font-family:"Microsoft YaHei","PingFang SC","Helvetica Neue",Arial,sans-serif;
+            line-height:1.75;
         }
-		
-		.yellowRed {
-					font-weight: bold;
-					background-color: skyblue;
-					    }
-		.blueRed {
-					font-weight: bold;
-					font-size: larger;
-					background-color: yellow;
-					    }						
-		
-        .title-section {
-            background-color: lightgrey; 
-            padding: 5px;
-            margin-top:10px;
+        .site-navbar{margin-bottom:0;border:none;box-shadow:0 4px 14px rgba(0,0,0,.06);}
+        .hero-wrap{
+            background:linear-gradient(135deg, rgba(36,87,214,.85), rgba(75,145,255,.75)), url("images/7htc.jpg") center/cover no-repeat;
+            padding:64px 0;color:#fff;
+        }
+        .hero-card{
+            max-width:920px;margin:0 auto;background:rgba(255,255,255,.10);
+            border:1px solid rgba(255,255,255,.2);border-radius:24px;padding:32px;
+            backdrop-filter: blur(8px);
+        }
+        .hero-card h1{margin:0 0 10px;font-size:38px;font-weight:800;letter-spacing:.5px;}
+        .hero-card p{margin:0;font-size:17px;opacity:.95;}
+        .page-shell{padding:34px 0 56px;}
+        .sidebar-card,.content-card,.mini-card{
+            background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);border:1px solid var(--border);
+        }
+        .sidebar-card{padding:14px;margin-bottom:16px;transition:.2s ease;}
+        .sidebar-card:hover{transform:translateY(-2px);}
+        .sidebar-card a{color:inherit;text-decoration:none;display:flex;align-items:center;gap:12px;}
+        .sidebar-card img{width:42px;height:42px;}
+        .sidebar-card h2{margin:0;font-size:20px;font-weight:700;}
+        .sidebar-card p{margin:2px 0 0;color:var(--muted);font-size:13px;text-transform:uppercase;letter-spacing:.08em;}
+        .content-card{padding:26px;}
+        .notice{
+            background:#fff5f5;border:1px solid #fecaca;color:#7f1d1d;border-radius:14px;
+            padding:16px 18px;font-size:16px;margin-bottom:22px;
+        }
+        .section-card{
+            border:1px solid var(--border);border-radius:16px;padding:22px;margin-bottom:22px;background:#fff;
+        }
+        .section-title{display:flex;align-items:center;gap:10px;margin:0 0 14px;font-size:24px;font-weight:800;color:#111827;}
+        .badge-inline{
+            display:inline-block;background:var(--warning);color:#8a5b00;padding:4px 10px;border-radius:999px;
+            font-weight:700;font-size:13px;
+        }
+        .info-list,.rules-list{padding-left:20px;margin-bottom:0;}
+        .info-list li,.rules-list li{margin-bottom:10px;}
+        .price-highlight{
+            background:var(--primary-soft);border:1px solid #cfe0ff;color:#163f9e;border-radius:14px;
+            padding:16px 18px;font-size:16px;font-weight:600;margin-bottom:16px;
+        }
+        .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
+        .mini-card{padding:16px;}
+        .mini-card h4{margin:0 0 8px;font-size:18px;font-weight:800;color:var(--primary);}
+        .mini-card p{margin:0;color:var(--muted);font-size:14px;}
+        .image-row{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:16px;}
+        .image-row img,.single-image img{
+            width:100%;border-radius:14px;border:1px solid var(--border);box-shadow:0 8px 22px rgba(0,0,0,.06);
+        }
+        .link-box{
+            background:#f9fafb;border:1px dashed #cbd5e1;border-radius:12px;padding:12px 14px;margin:12px 0;
+        }
+        .link-box a{font-weight:700;text-decoration:none;}
+        .video-row{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:14px;}
+        .video-row video{
+            width:100%;border-radius:14px;background:#000;box-shadow:0 8px 22px rgba(0,0,0,.12);
+        }
+        .danger-title{color:var(--danger);font-weight:800;margin-top:10px;}
+        .footer{margin-top:30px;}
+        .muted{color:var(--muted);}
+        .small{font-size:13px;}
+        .rules-columns{columns:2;column-gap:28px;}
+        .rules-columns li{break-inside:avoid;}
+        @media (max-width: 991px){
+            .hero-card h1{font-size:30px;}
+            .grid-2,.image-row,.video-row{grid-template-columns:1fr;}
+            .rules-columns{columns:1;}
+        }
+        @media (max-width: 767px){
+            .hero-wrap{padding:42px 0;}
+            .content-card{padding:18px;}
+            .section-card{padding:18px;}
+            .hero-card{padding:22px;}
+            .hero-card h1{font-size:26px;}
         }
     </style>
-	</head>
+</head>
+<body>
+    <div class="index-top"></div>
 
-	<body>
-		<div class="index-top">
-		</div>
-		<nav class="navbar navbar-inverse site-navbar">
-			<div class="about-nav-py">
-				<div class="container">
-					<div class="navbar-header">
-						
-						<button type="button" class="navbar-toggle collapsed jicheng" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-		                    <span class="sr-only">Toggle navigation</span>
-		                    <span class="icon-bar"></span>
-		                    <span class="icon-bar"></span>
-		                    <span class="icon-bar"></span>
-		               </button>
-		               <a class="navbar-brand" href=""><img alt="Brand" src="images/logo.png"></a>
-					</div>
-					<div id="navbar" class="collapse navbar-collapse">
-						<ul class="nav navbar-nav nav-top-quanju">
-							<li>
-								<a href="index.html">网站首页</a>
-							</li>
-							<li>
-								<a href="haiyun-manual.html">海运介绍</a>
-							</li>
-							<li>
-								<a href="kongyun.html" class="active-daohang">空运介绍</a>
-							</li>
-							<li>
-								<a href="news.html">到货记录</a>
-							</li>
-							<li>
-								<a href="xiadan.html">好物分享</a>
-							</li>
-							<li>
-								<a href="contact.html">联系我们</a>
-							</li>
-						</ul>
-					</div>
-					<!--/.nav-collapse -->
-				</div>
-			</div>
-		</nav>
-		<div id="wrapper" class="about-page">
-			<img src="images/7htc.jpg" class="about-page-img" />
-		</div>
-		<div class="about-us">
-			<div class="container">
-				<div class="row">
-					<div class="col-sm-2">
-						<div class="cebian">
-							<img src="images/ww.png"/>
-						<div>
-								<div></div>
-								<h2><b>1.空运规则</b></h2>
-								<p>Rules</p>
-							</div>
-						</div>
-						<br>
-						<div class="cebian">
-							<img src="images/ww.png"/>
-							<div>
-								<div></div>
-								<h2><a href="kongyun-examples.html">2.体积重示例</a></h2>
-								<p>Examples</p>
-							</div>
-						</div>
-						<br>
-						<div class="cebian">
-							<img src="images/ww.png"/>
-							<div>
-								<div></div>
-								<h2><a href="kongyun-sharing.html">3.用户晒单</a></h2>
-								<p>Sharing</p>
-							</div>
-						</div>												
-					</div>
-					<div class="col-sm-10">
-						<div class="bread-xie">
-						</div>
-						<div class="about-jianjie">
-							<h3 style="font-family: 'Microsoft YaHei';"><span class="red">免责声明</span>：此网站为群主为方便大家查阅制作，仅罗列了重点。所有规定请以空运公司【不是ER，跟海运不是一家！】的小程序-帮助支持-如何下单-<span class="red">用户守则</span>为主。</h3>
-							<div class="title-section">
-								<h3>一、📅时效：</h3>
-							</div>
-		<ul class="delivery-list">
-		                        <li>到货记录（每月发货8-10次，发货后4-7天到渥太华）</li>
-		                       
-		                    </ul>
+    <nav class="navbar navbar-inverse site-navbar">
+        <div class="about-nav-py">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed jicheng" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href=""><img alt="Brand" src="images/logo.png"></a>
+                </div>
+                <div id="navbar" class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav nav-top-quanju">
+                        <li><a href="index.html">网站首页</a></li>
+                        <li><a href="haiyun-manual.html">海运介绍</a></li>
+                        <li><a href="kongyun.html" class="active-daohang">空运介绍</a></li>
+                        <li><a href="news.html">到货记录</a></li>
+                        <li><a href="xiadan.html">好物分享</a></li>
+                        <li><a href="contact.html">联系我们</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
 
-							<div class="title-section">
-								<h3>二、💰价格（<span class="yellowRed">200克起，不拆箱，不合箱，按包裹计费。有体积重</span>）：</h3>
-								</div>
-							<h4 class="red">服装59.9/KG</h4>
-							<p>首重（0.2KG）：人民币¥11.98/200g起运，续重¥5.99/100g.单边超过55cm或者单箱超过22kg或者三边之和大于110cm都禁运。服装=衣服、裤子、裙子、内衣、泳衣以及宠物服装，但不包括其它穿在身上的品类。</p>							
-							<h4 class="red">服装以外的普货¥69.9/KG</h4><p>人民币¥13.98/200g起运，续重¥6.99/100g。单边超过55cm或者单箱超过22kg或者三边之和大于110cm都禁运。服饰/鞋靴/箱包/图书/餐具(不含刀类)/家纺/手机壳（无磁/液体/粉末等）/手机膜（无酒精/白边液/湿巾/液体/粉末等）/数据线品类, 只要不带电池/磁性或禁运物品, 则均系快件普货物品</p>
-							<h4 class="red">敏货¥79.9/KG</h4><p>人民币¥15.98/200g起运，续重¥7.99/100g。单边超过55cm或者单箱超过22kg或者三边之和大于110cm都禁运。主要是电器/化妆品/非管制刀具/带<span class="red">1500毫安时</span>左右小容量电池或弱磁性的物品/其它非禁运的品类等【具体拉到本页面最下面看】。如果一个包裹有多个带电池的，累计不可以超过1500毫安时。</p>
-							
-							<h4 class="blue">注意：</h4>
-							<p> 1. 有体积重（长cm*宽cm*高cm/5000，与KG重相比，哪个大取哪个），点击此链接有体积重例子➡️：<a href="https://ottawaali.github.io/kongyun-examples.html" style="text-decoration: underline;"> <span class="blueRed">体积重举例</span></a></p>
-							<p> 2. 体积重太大的蓬松物体，可以花3元人民币/每件进行“改泡”。<span style="color: red;">具体流程看小程序-帮助支持-如何下单-用户守则</span>或点击此链接➡️：<a href="https://ottawaali.github.io/kongyun-process.html" style="text-decoration: underline;"> <span class="blueRed">下单流程</span></a></p>
-                             <p>3. 任何一边长度超过55cm的包裹无法托运【超过0.1cm也不行】，另外，三边长之和超过110cm的包裹原则上亦将无法托运【超过0.1也不行】；明显非个人自用物品【比如帮舞蹈队一下子运了10套裙子】，理论上禁运，3公斤以内的酌情可寄【9kg应拆为3个快递号发货】，但存在海关风险。</p>
-	<p>4.请注意：只接受商家（天猫/淘宝/拼多多/1688/抖音/京东等电商，或者线下商家）发的自用包裹【也就是说，自己用的东西可以寄，不可以寄商业用途、自己买到加拿大进行二次售卖的包裹】。否则海关查验、退包费用约1000元由客户承担。</p>
-	<img src="images/jiabao.jpeg"/ width="300" height="240">	
-		<p>5.请注意：普货禁止夹带敏货、特货，否则海关查验、退包费用约1000元由客户承担。</p>
-		<p>6.京东经常1快递号多件发货， 所以扫码枪扫出来有后缀，预申报的时候单号必须要带“-1-2-”，“-2-2-”这样的后缀。 不然无法入库。如果只有一件，也要加-1-1-。比如：JD0108086406666这个货运单号，如果只有1个包裹，申报：“JD0108086406666-1-1-” ；如果有2个包裹，分别申报“JD0108086406666-1-2-”，“JD0108086406666-2-2-”.</p>
-		
-			<p>6.支付方式：微信或者EMT充值（点击此链接，➡️：<a href="https://ottawaali.github.io/emt.html" style="text-decoration: underline;"> <span class="blueRed">EMT充值流程</span></a>）</p>			
-					
-							<div class="title-section"><h3>
-							四、⚠️流程【新版小程序略有不同，不再重新录制，仅供参考】：</h3>
-							</div>
-							<p>1.文字+截图版本：点击此链接有更详细步骤➡️：<a href="https://ottawaali.github.io/kongyun-process.html" style="text-decoration: underline;"> <span class="blueRed">下单流程</span></a></p>
-							<img src="images/fiveSteps-new.png"/ width="800" height="450">
-							<p>2.视频版本<strong class = "blue">（2024年1月版本，现在小程序已经改版。改泡只需3元，多了“服装”类别）</strong></p>
-						<p><strong class = "blue"></strong></p>
-							<div class="video-container">
-							<video  controls poster="images/kongyunface01.png" src="video/newJan29-2024.mp4" controls width=30% height=30%></video>
-							
-							<video controls poster="images/kongyunfacegai.png" src="video/gai202404222.mp4" controls width=30% height=30%>							
-							</video>
-						
-							<p><strong class = "blue"></strong></p>
-							
-							<p class="red">各位京东下单的朋友：</p>
-							<p>京东经常1快递号多件发货， 所以扫码枪扫出来有后缀，预申报的时候单号必须要带“-1-2-”，“-2-2-”这样的后缀。 不然无法入库。如果只有一件，也要加-1-1-。比如：JD0108086406666这个货运单号，如果只有1个包裹，申报：“JD0108086406666-1-1-” ；如果有2个包裹，分别申报“JD0108086406666-1-2-”，“JD0108086406666-2-2-”</p>
-							
+    <section class="hero-wrap">
+        <div class="container">
+            <div class="hero-card">
+                <h1>空运规则</h1>
+                <p>快速看懂时效、价格、下单流程与禁运规则。页面信息为便于查阅整理，正式规定请以小程序“帮助支持 → 如何下单 → 用户守则”为准。</p>
+            </div>
+        </div>
+    </section>
 
-							
-							
-														<div class="title-section"><h3>附：快件禁运物品：</h3></div>							<p>现金/有价证券，工业原材料/贵金属，强磁性/易燃易爆/放射性/腐蚀性/挥发性物品，液体（流动性）/粉末(定义为黄豆粒或更小的颗粒)类物品, 烟酒类、毒品/麻醉剂、鲜活动植物、动植物标本、原木相关物品(含木箱)、农药、除虫剂/除草剂、军火/武器/仿真武器，包含与良好道德以及公众秩序相悖内容的包裹，因其形状/性质/包装方式可能给其他人带来威胁或损害的包裹(如药品/二手物品/身份证件及文件/非空白内容的光碟或磁碟/纯锂电池/充电宝/手机/电脑/激光笔/奢侈品/仿牌/无人机/手机SIM卡/银行卡/成人用品/香薰/隐形眼镜/形状怪异之包裹)等均系常见的快件禁运物品；</p>							<p class="red"><strong>常见疑问品类详见下述：</strong></p>
-							<ol>
-								<li style="font-size: inherit;">化妆品不禁运，须按敏感货寄，但指甲油香水等含酒精类禁运，含液体（流动性）/粉末等亦禁运；</p>
-								<li>带1500毫安左右小容量电池或弱磁性物品可按敏感货寄，纯锂电池/充电宝/平衡车/电动滑板车/无人机【哪怕去掉电池，无人机也禁运】禁运；</p>
-								<li>图书(带出版文号的方可归为图书)可按普货寄，但含政治/宗教/历史内容的禁运；</p>
-								<li>药品/成人用品/香薰/隐形眼镜等均禁运，非禁运化妆品按敏感货邮寄；</p>
-								<li>明显非个人自用物品等均禁运；做生意的朋友，大批量的商业用品禁运❗️</p>
-								<li>食品严格禁运。能吃的就是食品，哪怕是宠物的食品；</p>
-								<li>液体/粉末类物品禁运；</p>
-								<li>开锋管制刀具禁运，非管制刀具可按特货寄【但是特货目前禁运】；</p>
-								<li>电子烟禁运；</p>
-								<li>激光笔和带液体的笔类禁运；</p>
-								<li>贵金属/珠宝禁运（金银铜都是贵金属。 珍珠不可以。贱金属/木制/玻璃/树脂/塑料等可以。水晶原石不可以。人造水晶可以作为普货，天然水晶制作的首饰可以作为敏货）；</p>
-								<li>仿牌产品、奢侈品牌（如LV、Gucci、爱马仕等）、一二线品牌（如AJ等）禁运；</p>
-								<li>医疗用品/器械/(产品批准文号带“械”字)禁运；</p>
-								<li>纯文件不能接受, 除非和物品混装。</p>
-							</ol>							<p class="red">顾客在向驿站咨询某物品是否属于普货/敏感货/禁运物品时，请自行对物品做好详细了解后直接提出担心点，比如液体/粉末/带电池/磁性具等；驿站的答复仅为根据顾客提供的有限资料做出的善意建议， 并不应为此承担任何责任。</p>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="footer">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-12">
-						<div>
-							<div class="footer-ul">
-								<ul>
-									<li><a href="index.html">站点首页</a></li>
-									<li><a href="haiyun.html">海运介绍</a></li>
-									<li><a href="kongyun.html">空运介绍</a></li>
-									<li><a href="news.html">到货记录</a></li>
-									<li><a href="xiadan.html">好物分享</a></li>
-									<li><a href="contact.html">联系我们</a></li>
-								</ul>
-							</div>
-							<div class="copy-r">
-								<p>© 2022 Ottawa-Ali 版权所有</p>
-							</div>
-						</div>
-						
-					</div>
-				</div>
-			</div>
-		</div>
-		
-	</body>
-	<script type="text/javascript" src="js/jquery.min.js"></script>
-	<script type="text/javascript" src="js/bootstrap.min.js"></script>
-	<script type="text/javascript" src="js/main.js"></script>
+    <div class="page-shell">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-3">
+                    <div class="sidebar-card">
+                        <a href="kongyun.html">
+                            <img src="images/ww.png" alt="">
+                            <div>
+                                <h2>1. 空运规则</h2>
+                                <p>Rules</p>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="sidebar-card">
+                        <a href="kongyun-examples.html">
+                            <img src="images/ww.png" alt="">
+                            <div>
+                                <h2>2. 体积重示例</h2>
+                                <p>Examples</p>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="sidebar-card">
+                        <a href="kongyun-sharing.html">
+                            <img src="images/ww.png" alt="">
+                            <div>
+                                <h2>3. 用户晒单</h2>
+                                <p>Sharing</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
 
+                <div class="col-sm-9">
+                    <div class="content-card">
+                        <div class="notice">
+                            <strong>免责声明：</strong> 此网站为群主为方便大家查阅制作，仅罗列重点。所有规定请以空运公司（不是 ER，和海运不是一家）的小程序
+                            <strong>帮助支持 → 如何下单 → 用户守则</strong> 为准。
+                        </div>
+
+                        <section class="section-card">
+                            <h3 class="section-title">📅 时效</h3>
+                            <ul class="info-list">
+                                <li>每月发货约 8–10 次。</li>
+                                <li>发货后通常 <strong>4–7 天到渥太华</strong>。</li>
+                                <li>具体发货与到货记录请以最新通知为准。</li>
+                            </ul>
+                        </section>
+
+                        <section class="section-card">
+                            <h3 class="section-title">💰 价格 <span class="badge-inline">200 克起 / 按包裹计费 / 有体积重</span></h3>
+                            <div class="price-highlight">
+                                目前（26 年 3 月）普货价格为 <strong>65 人民币 / KG</strong>。具体价格请以小程序首页下方为准。
+                                200 克起算；按单个快递计费；不拆箱（除非付费改泡）；不合箱；有体积重。
+                            </div>
+                            <div class="grid-2">
+                                <div class="mini-card">
+                                    <h4>费用特点</h4>
+                                    <p>按包裹计费，不是合并多个快递一起算。首页下方有运费测算功能，可以先自行预估。</p>
+                                </div>
+                                <div class="mini-card">
+                                    <h4>体积重规则</h4>
+                                    <p>长 × 宽 × 高 / 5000，与实际 KG 重相比，哪个大取哪个。</p>
+                                </div>
+                            </div>
+                            <div class="image-row">
+                                <img src="images/kongyunprice.png" alt="空运价格截图">
+                                <img src="images/pricecheck.png" alt="运费测算截图">
+                            </div>
+                            <div class="link-box">
+                                体积重例子：<a href="https://ottawaali.github.io/kongyun-examples.html">查看体积重举例</a>
+                            </div>
+                            <div class="link-box">
+                                改泡与详细流程：<a href="https://ottawaali.github.io/kongyun-process.html">查看下单流程</a>
+                            </div>
+                        </section>
+
+                        <section class="section-card">
+                            <h3 class="section-title">⚠️ 注意事项</h3>
+                            <ol class="info-list">
+                                <li>体积重太大的蓬松物体，可花 3 元人民币 / 每件进行“改泡”。</li>
+                                <li>任何一边超过 <strong>55 cm</strong> 的包裹无法托运；三边之和超过 <strong>110 cm</strong> 原则上也无法托运。</li>
+                                <li>只接受商家发出的 <strong>个人自用包裹</strong>，不接受商业用途或二次售卖用途的包裹。</li>
+                                <li>普货禁止夹带敏货、特货，否则海关查验、退包费用约 1000 元由客户承担。</li>
+                                <li>京东经常 1 个快递号对应多个包裹，预申报时必须带后缀，例如 <code>-1-1-</code>、<code>-1-2-</code>、<code>-2-2-</code>。</li>
+                                <li>支付方式：微信或 EMT 充值。<a href="https://ottawaali.github.io/emt.html">查看 EMT 充值流程</a></li>
+                            </ol>
+                            <div class="single-image" style="margin-top:16px;">
+                                <img src="images/jiabao.jpeg" alt="自用包裹示意图" style="max-width:360px;">
+                            </div>
+                        </section>
+
+                        <section class="section-card">
+                            <h3 class="section-title">🧾 下单流程</h3>
+                            <p>新版小程序界面略有不同，以下内容仅供参考。</p>
+                            <div class="link-box">
+                                文字 + 截图版本：<a href="https://ottawaali.github.io/kongyun-process.html">查看更详细步骤</a>
+                            </div>
+                            <div class="single-image" style="margin-top:16px;">
+                                <img src="images/fiveSteps-new.png" alt="五步下单流程图">
+                            </div>
+                            <p class="danger-title">视频版本</p>
+                            <p class="muted small">视频为 2024 年 1 月版本，目前小程序已改版。改泡费用现为 3 元，并新增了“服装”类别。</p>
+                            <div class="video-row">
+                                <video controls poster="images/kongyunface01.png" src="video/newJan29-2024.mp4"></video>
+                                <video controls poster="images/kongyunfacegai.png" src="video/gai202404222.mp4"></video>
+                            </div>
+                            <div class="notice" style="margin-top:18px;">
+                                <strong>京东用户提醒：</strong> 如果一个运单号对应多个包裹，申报时必须带后缀。
+                                例如：<code>JD0108086406666-1-1-</code>、<code>JD0108086406666-1-2-</code>、<code>JD0108086406666-2-2-</code>
+                            </div>
+                        </section>
+
+                        <section class="section-card">
+                            <h3 class="section-title">🚫 常见禁运物品</h3>
+                            <p>
+                                现金 / 有价证券、强磁性、易燃易爆、放射性、腐蚀性、挥发性物品，液体 / 粉末，烟酒、毒品、鲜活动植物、
+                                原木相关物品、农药、军火 / 武器 / 仿真武器，以及可能危害公众安全或违反海关规定的包裹均属常见禁运范围。
+                            </p>
+                            <p class="danger-title">常见疑问品类</p>
+                            <ol class="rules-list rules-columns">
+                                <li>化妆品不禁运，但须按敏感货寄；指甲油、香水等含酒精类禁运。</li>
+                                <li>带约 1500mAh 小容量电池或弱磁性物品可按敏感货寄；纯锂电池、充电宝、无人机等禁运。</li>
+                                <li>图书可按普货寄，但涉及政治、宗教、历史敏感内容禁运。</li>
+                                <li>药品、成人用品、香薰、隐形眼镜等禁运。</li>
+                                <li>明显非个人自用物品、大批量商业用品禁运。</li>
+                                <li>食品严格禁运，包括宠物食品。</li>
+                                <li>液体、粉末类物品禁运。</li>
+                                <li>开锋管制刀具禁运；非管制刀具仅在允许特货时才可寄。</li>
+                                <li>电子烟禁运。</li>
+                                <li>激光笔和带液体的笔类禁运。</li>
+                                <li>贵金属 / 珠宝禁运；部分非贵重材质饰品可寄，具体需单独确认。</li>
+                                <li>仿牌、奢侈品牌及一二线品牌商品禁运。</li>
+                                <li>医疗用品 / 器械（批准文号带“械”字）禁运。</li>
+                                <li>纯文件不能单独寄送，需与物品混装。</li>
+                            </ol>
+                            <div class="notice" style="margin-top:18px;">
+                                顾客咨询某物品是否属于普货 / 敏感货 / 禁运物品时，请先自行了解物品属性，并明确说明是否含液体、粉末、电池、磁性等。
+                                驿站答复仅为基于有限信息的善意建议，不承担最终责任。
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div>
+                        <div class="footer-ul">
+                            <ul>
+                                <li><a href="index.html">站点首页</a></li>
+                                <li><a href="haiyun.html">海运介绍</a></li>
+                                <li><a href="kongyun.html">空运介绍</a></li>
+                                <li><a href="news.html">到货记录</a></li>
+                                <li><a href="xiadan.html">好物分享</a></li>
+                                <li><a href="contact.html">联系我们</a></li>
+                            </ul>
+                        </div>
+                        <div class="copy-r">
+                            <p>© 2022 Ottawa-Ali 版权所有</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
+</body>
 </html>
